@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import { IncidentModel } from "../../data/models/incident.model"
 import { StatusCodes } from "http-status-codes"
+import { EmailService } from "../../domain/services/email.service"
 
 export class IncidentController {
   public getIncidents = async(req: Request, res: Response)=>{
@@ -21,7 +22,13 @@ export class IncidentController {
         lat: lat,
         lng: lng
       })
-      res.json(newIncident).status(StatusCodes.CREATED)
+      // const emailService = new EmailService();
+      // await emailService.sendEmail({
+      //   to: "claudioalejandro4@gmail.com",
+      //   subject: title,
+      //   htmlBody:`<h1>${description}</h1>`
+      // })
+      return res.json(newIncident).status(StatusCodes.CREATED)
     }catch(error){
       res.json(error).status(StatusCodes.INTERNAL_SERVER_ERROR)
     }

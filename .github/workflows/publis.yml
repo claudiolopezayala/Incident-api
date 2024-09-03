@@ -18,5 +18,10 @@ jobs:
             - name: Build Docker image
               run: docker build -t claudio883/incident-api:${{ github.sha }} .
 
+            - name: Tag Latest
+              run: docker tag claudio883/incident-api:${{ github.sha }} claudio883/incident-api:latest
+
             - name: Push Docker image
-              run: docker push claudio883/incident-api:${{ github.sha }}
+              run: |
+                docker push claudio883/incident-api:${{ github.sha }}
+                docker push claudio883/incident-api:latest
